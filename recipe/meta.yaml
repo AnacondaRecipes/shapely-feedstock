@@ -9,7 +9,7 @@ source:
   sha256: e21a9fe1a416463ff11ae037766fe410526c95700b9e545372475d2361cc951e
 
 build:
-  number: 3
+  number: 0
   skip: True  # [win and vc<14]
 
 requirements:
@@ -55,3 +55,4 @@ extra:
     - pelson
     - phobson
     - xylar
+    - msarahan
