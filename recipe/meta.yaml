@@ -13,20 +13,17 @@ build:
 
 requirements:
   build:
+    - {{ compiler('c') }}
+  host:
     - python
     - setuptools
     - cython
-    - numpy 1.8.*  # [not (win and (py35 or py36))]
-    - numpy 1.9.*  # [win and py35]
-    - numpy 1.11.*  # [win and py36]
-    - geos 3.6.2
-    - msinttypes  # [win and py<35]
+    - numpy
+    - geos
+    - msinttypes  # [win and vc<14]
   run:
     - python
-    - numpy >=1.8  # [not (win and (py35 or py36))]
-    - numpy >=1.9  # [win and py35]
-    - numpy >=1.11  # [win and py36]
-    - geos 3.6.2
+    - {{ pin_compatible('numpy') }}
 
 test:
   source_files:
@@ -53,3 +50,4 @@ extra:
     - ocefpaf
     - pelson
     - phobson
+    - msarahan
