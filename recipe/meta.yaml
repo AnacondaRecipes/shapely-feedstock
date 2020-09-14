@@ -1,4 +1,4 @@
-{% set version = "1.7.0" %}
+{% set version = "1.7.1" %}
 
 package:
   name: shapely
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/S/Shapely/Shapely-{{ version }}.tar.gz
-  sha256: e21a9fe1a416463ff11ae037766fe410526c95700b9e545372475d2361cc951e
+  sha256: 1641724c1055459a7e2b8bbe47ba25bdc89554582e62aec23cb3f3ca25f9b129
 
 build:
   number: 0
@@ -44,7 +44,6 @@ test:
     # skip one failure caused by geos 3.8
     # https://github.com/Toblerity/Shapely/issues/777
     - pytest -k "not OperationsTestCase" tests --with-speedups
-
 about:
   home: https://github.com/Toblerity/Shapely
   license: BSD-3-Clause
