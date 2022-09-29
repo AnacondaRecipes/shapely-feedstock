@@ -1,26 +1,31 @@
-{% set version = "1.7.1" %}
+{% set name = "Shapely" %}
+{% set version = "1.8.4" %}
 
 package:
-  name: shapely
+  name: {{ name|lower }}
   version: {{ version.split('.post')[0] }}
 
 source:
-  url: https://pypi.io/packages/source/S/Shapely/Shapely-{{ version }}.tar.gz
-  sha256: 1641724c1055459a7e2b8bbe47ba25bdc89554582e62aec23cb3f3ca25f9b129
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: a195e51caafa218291f2cbaa3fef69fd3353c93ec4b65b2a4722c4cf40c3198c
 
 build:
   number: 0
   skip: True  # [win and vc<14]
+  skip: True  # [py<36]
 
 requirements:
   build:
     - {{ compiler('c') }}
   host:
     - python
-    - pip
-    - cython
-    - numpy
+    - cython >=0.29.24,<3
     - geos
+    - numpy   1.19  # [py<310]
+    - numpy   1.21  # [py>=310]
+    - pip
+    - setuptools <64
+    - wheel
   run:
     - python
     - {{ pin_compatible('numpy') }}
@@ -29,26 +34,28 @@ test:
   source_files:
     - tests
   requires:
+    - pip
     - pytest
   imports:
     - shapely
-    - shapely.speedups
-    - shapely.speedups._speedups
-    - shapely.vectorized
-    - shapely.vectorized._vectorized
-    - shapely.geometry
     - shapely.algorithms
     - shapely.examples
-    - shapely.geos
+    - shapely.geometry
+    - shapely.speedups
+    - shapely.vectorized
   commands:
-    # skip one failure caused by geos 3.8
-    # https://github.com/Toblerity/Shapely/issues/777
-    - pytest -k "not OperationsTestCase" tests --with-speedups
+    - pip check
+
 about:
   home: https://github.com/Toblerity/Shapely
   license: BSD-3-Clause
+  license_family: BSD
   license_file: LICENSE.txt
+  license_url: https://github.com/shapely/shapely/blob/main/LICENSE.txt
   summary: "Python package for manipulation and analysis of geometric objects in the Cartesian plane"
+
+  dev_url: https://github.com/Toblerity/Shapely
+  doc_url: https://shapely.readthedocs.io/en/stable/
 
 extra:
   recipe-maintainers:
