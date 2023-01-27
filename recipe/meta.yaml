@@ -1,31 +1,34 @@
 {% set name = "Shapely" %}
-{% set version = "1.8.4" %}
+{% set version = "2.0.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version.split('.post')[0] }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: a195e51caafa218291f2cbaa3fef69fd3353c93ec4b65b2a4722c4cf40c3198c
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name|lower }}-{{ version }}.tar.gz
+  sha256: 11f1b1231a6c04213fb1226c6968d1b1b3b369ec42d1e9655066af87631860ea
 
 build:
   number: 0
   # geos currently isn't available on s390x
-  skip: True  # [py<36 or s390x]
-  skip: True  # [win and vc<14]
+  skip: True  # [py<37 or s390x]
+  script:
+    - set GEOS_INCLUDE_PATH=%LIBRARY_INC%  # [win]
+    - set GEOS_LIBRARY_PATH=%LIBRARY_LIB%  # [win]
+    - {{ PYTHON }} -m pip install . -vv
 
 requirements:
   build:
     - {{ compiler('c') }}
   host:
     - python
-    - cython >=0.29.24,<3
+    - cython
     - geos
-    - numpy   1.19  # [py<310]
-    - numpy   1.21  # [py>=310]
+    - numpy 1.19  # [(not (osx and arm64)) and py<310]
+    - numpy 1.21  # [(osx and arm64) or py>=310]
     - pip
-    - setuptools <64
+    - setuptools
     - wheel
   run:
     - python
@@ -40,22 +43,25 @@ test:
   imports:
     - shapely
     - shapely.algorithms
-    - shapely.examples
     - shapely.geometry
-    - shapely.speedups
     - shapely.vectorized
   commands:
     - pip check
+    - pytest --pyargs shapely.tests
 
 about:
-  home: https://github.com/Toblerity/Shapely
+  home: https://github.com/shapely/shapely
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.txt
-  license_url: https://github.com/shapely/shapely/blob/main/LICENSE.txt
   summary: "Python package for manipulation and analysis of geometric objects in the Cartesian plane"
-
-  dev_url: https://github.com/Toblerity/Shapely
+  description: |
+    Shapely is a BSD-licensed Python package for manipulation and analysis of
+    planar geometric objects. Shapely is not a GIS package: it does not deal
+    with spatial reference systems, formats, or coordinate systems. Shapely
+    focuses on the geometric operations themselves, and the objects on which
+    they operate. Shapely is fast and lightweight, with no external dependencies.
+  dev_url: https://github.com/shapely/shapely
   doc_url: https://shapely.readthedocs.io/en/stable/
 
 extra:
