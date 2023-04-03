@@ -20,12 +20,10 @@ requirements:
     - {{ compiler('c') }}
   host:
     - python
-    - cython >=0.29.24,<3
-    - geos
-    - numpy   1.19  # [py<310]
-    - numpy   1.21  # [py>=310]
+    - cython 0.29.33
+    - numpy
     - pip
-    - setuptools <64
+    - setuptools
     - wheel
   run:
     - python
