@@ -34,14 +34,8 @@ test:
     - tests
   requires:
     - pip
-    - pytest
   imports:
     - shapely
-    - shapely.algorithms
-    - shapely.examples
-    - shapely.geometry
-    - shapely.speedups
-    - shapely.vectorized
   commands:
     - pip check
 
