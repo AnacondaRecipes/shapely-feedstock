@@ -50,7 +50,6 @@ about:
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.txt
-  license_url: https://github.com/shapely/shapely/blob/main/LICENSE.txt
   summary: "Python package for manipulation and analysis of geometric objects in the Cartesian plane"
 
   dev_url: https://github.com/Toblerity/Shapely
