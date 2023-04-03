@@ -11,7 +11,8 @@ source:
 
 build:
   number: 0
-  skip: True  # [py<37]
+  # geos currently isn't available on s390x
+  skip: True  # [py<37 or s390x]
   skip: True  # [win and vc<14]
   script:
     - set GEOS_INCLUDE_PATH=%LIBRARY_INC%  # [win]
