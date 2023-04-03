@@ -42,13 +42,9 @@ test:
     - pytest
   imports:
     - shapely
-    - shapely.algorithms
-    - shapely.examples
-    - shapely.geometry
-    - shapely.speedups
-    - shapely.vectorized
   commands:
     - pip check
+    - pytest --pyargs shapely.tests
 
 about:
   home: https://github.com/Toblerity/Shapely
