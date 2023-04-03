@@ -51,7 +51,7 @@ about:
   license_family: BSD
   license_file: LICENSE.txt
   summary: "Python package for manipulation and analysis of geometric objects in the Cartesian plane"
-
+  description: Shapely is a BSD-licensed Python package for manipulation and analysis of planar geometric objects
   dev_url: https://github.com/Toblerity/Shapely
   doc_url: https://shapely.readthedocs.io/en/stable/
 
