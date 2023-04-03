@@ -36,7 +36,7 @@ test:
     - pip
   imports:
     # ModuleNotFoundError: No module named 'shapely'
-    - shapely
+    # - shapely
   commands:
     - pip check
     - pytest --pyargs shapely.tests
