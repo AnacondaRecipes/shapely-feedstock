@@ -12,7 +12,7 @@ source:
 build:
   number: 0
   # geos currently isn't available on s390x
-  skip: True  # [py<36 or s390x]
+  skip: True  # [py<37 or s390x]
   skip: True  # [win and vc<14]
 
 requirements:
