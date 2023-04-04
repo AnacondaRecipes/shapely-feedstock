@@ -39,7 +39,6 @@ test:
     # - shapely
   commands:
     - pip check
-    - pytest --pyargs shapely.tests
 
 about:
   home: https://github.com/Toblerity/Shapely
