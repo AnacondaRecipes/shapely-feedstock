@@ -14,7 +14,10 @@ build:
   # geos currently isn't available on s390x
   skip: True  # [py<37 or s390x]
   skip: True  # [win and vc<14]
-  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv 
+  script: 
+    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv 
+    - set GEOS_INCLUDE_PATH=%LIBRARY_INC%  # [win]
+    - set GEOS_LIBRARY_PATH=%LIBRARY_LIB%  # [win]
 
 requirements:
   build:
