@@ -24,8 +24,8 @@ requirements:
   host:
     - python
     - cython 0.29.33
-    - numpy
-    - geos 3.9.1
+    - numpy {{ numpy }}
+    - geos {{ geos }}
     - pip
     - setuptools
     - wheel
