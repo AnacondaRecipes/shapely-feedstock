@@ -49,7 +49,7 @@ test:
     - pytest --pyargs shapely
 
 about:
-  home: https://github.com/Toblerity/Shapely
+  home: https://github.com/shapely/shapely
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.txt
