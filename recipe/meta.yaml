@@ -10,7 +10,7 @@ source:
   sha256: 6250e79ca299222a239ce44df613d228f1216c5cc31351217bf377b03d7be4e0
 
 build:
-  number: 0
+  number: 1
   # geos currently isn't available on s390x
   skip: True  # [py<37 or s390x]
   script: 
@@ -23,7 +23,7 @@ requirements:
     - {{ compiler('c') }}
   host:
     - python
-    - cython 0.29.33
+    - cython 0.29
     - numpy {{ numpy }}
     - geos {{ geos }}
     - pip
