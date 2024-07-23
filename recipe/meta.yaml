@@ -10,7 +10,7 @@ source:
   sha256: 56c0aee11b31a9dd18120423d350fa6109663d4e46bccc58550bc7d735f18005
 
 build:
-  number: 1
+  number: 0
   # geos currently isn't available on s390x
   skip: True  # [py<37 or s390x]
   script:
@@ -27,7 +27,7 @@ requirements:
     - numpy {{ numpy }}
     - geos {{ geos }}
     - pip
-    - setuptools
+    - setuptools >=61.0.0
     - wheel
   run:
     - python
@@ -35,7 +35,7 @@ requirements:
 
 test:
   source_files:
-    - tests
+    - shapely/tests
   requires:
     - pip
     - pytest
@@ -46,7 +46,7 @@ test:
     - shapely.vectorized
   commands:
     - pip check
-    - pytest --pyargs shapely
+    - pytest shapely/tests -v
 
 about:
   home: https://github.com/shapely/shapely
