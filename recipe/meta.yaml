@@ -1,5 +1,5 @@
 {% set name = "Shapely" %}
-{% set version = "2.0.1" %}
+{% set version = "2.0.5" %}
 
 package:
   name: {{ name|lower }}
@@ -7,16 +7,16 @@ package:
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 6250e79ca299222a239ce44df613d228f1216c5cc31351217bf377b03d7be4e0
+  sha256: 56c0aee11b31a9dd18120423d350fa6109663d4e46bccc58550bc7d735f18005
 
 build:
   number: 1
   # geos currently isn't available on s390x
   skip: True  # [py<37 or s390x]
-  script: 
+  script:
     - set GEOS_INCLUDE_PATH=%LIBRARY_INC%  # [win]
     - set GEOS_LIBRARY_PATH=%LIBRARY_LIB%  # [win]
-    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv 
+    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   build:
