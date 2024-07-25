@@ -47,6 +47,8 @@ test:
   commands:
     - pip check
     - pytest shapely/tests -v
+    # osx fails if LC_ALL is empty
+    - export LC_ALL=en_US.UTF-8  # [osx]
 
 about:
   home: https://github.com/shapely/shapely
