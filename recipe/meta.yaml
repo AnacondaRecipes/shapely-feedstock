@@ -1,41 +1,39 @@
 {% set name = "Shapely" %}
-{% set version = "2.0.1" %}
+{% set version = "2.0.5" %}
 
 package:
   name: {{ name|lower }}
-  version: {{ version.split('.post')[0] }}
+  version: {{ version }}
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 6250e79ca299222a239ce44df613d228f1216c5cc31351217bf377b03d7be4e0
+  sha256: 56c0aee11b31a9dd18120423d350fa6109663d4e46bccc58550bc7d735f18005
 
 build:
-  number: 1
+  number: 0
   # geos currently isn't available on s390x
   skip: True  # [py<37 or s390x]
-  script: 
+  script:
     - set GEOS_INCLUDE_PATH=%LIBRARY_INC%  # [win]
     - set GEOS_LIBRARY_PATH=%LIBRARY_LIB%  # [win]
-    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv 
+    - {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
 
 requirements:
   build:
     - {{ compiler('c') }}
   host:
     - python
-    - cython 0.29
+    - cython
     - numpy {{ numpy }}
     - geos {{ geos }}
     - pip
-    - setuptools
+    - setuptools >=61.0.0
     - wheel
   run:
     - python
     - {{ pin_compatible('numpy') }}
 
 test:
-  source_files:
-    - tests
   requires:
     - pip
     - pytest
@@ -46,14 +44,17 @@ test:
     - shapely.vectorized
   commands:
     - pip check
-    - pytest --pyargs shapely
+    # osx fails if LC_ALL is not Italian or Portuguese
+    # see https://github.com/shapely/shapely/blob/2.0.5/shapely/tests/legacy/test_locale.py#L14
+    - export LC_ALL=it_IT.UTF-8  # [osx]
+    - pytest --pyargs shapely -v
 
 about:
   home: https://github.com/shapely/shapely
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE.txt
-  summary: "Python package for manipulation and analysis of geometric objects in the Cartesian plane"
+  summary: Python package for manipulation and analysis of geometric objects in the Cartesian plane
   description: Shapely is a BSD-licensed Python package for manipulation and analysis of planar geometric objects.
   dev_url: https://github.com/shapely/shapely
   doc_url: https://shapely.readthedocs.io/en/stable/
