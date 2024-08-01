@@ -23,7 +23,7 @@ requirements:
     - {{ compiler('c') }}
   host:
     - python
-    - cython 0.29
+    - cython
     - numpy {{ numpy }}
     - geos {{ geos }}
     - pip
@@ -57,7 +57,7 @@ about:
   summary: Python package for manipulation and analysis of geometric objects in the Cartesian plane
   description: Shapely is a BSD-licensed Python package for manipulation and analysis of planar geometric objects.
   dev_url: https://github.com/shapely/shapely
-  doc_url: https://shapely.readthedocs.io/
+  doc_url: https://shapely.readthedocs.io/en/stable/
 
 extra:
   recipe-maintainers:
