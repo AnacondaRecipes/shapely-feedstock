@@ -44,9 +44,6 @@ test:
     - shapely.vectorized
   commands:
     - pip check
-    # osx fails if LC_ALL is not Italian or Portuguese
-    # see https://github.com/shapely/shapely/blob/2.0.5/shapely/tests/legacy/test_locale.py#L14
-    - export LC_ALL=it_IT.UTF-8  # [osx]
     - pytest --pyargs shapely -v
 
 about:
