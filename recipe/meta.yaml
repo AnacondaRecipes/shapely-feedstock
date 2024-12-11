@@ -1,5 +1,5 @@
 {% set name = "Shapely" %}
-{% set version = "2.0.5" %}
+{% set version = "2.0.6" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: 56c0aee11b31a9dd18120423d350fa6109663d4e46bccc58550bc7d735f18005
+  sha256: 71f1830bd1aa42d0493c8beb48c2e80712450af43376af4ba3bf40f0d9064120
 
 build:
   number: 0
