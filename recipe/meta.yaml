@@ -31,7 +31,7 @@ requirements:
     - wheel
   run:
     - python
-    - {{ pin_compatible('numpy') }}
+    - numpy >=1.14,<3
 
 test:
   requires:
