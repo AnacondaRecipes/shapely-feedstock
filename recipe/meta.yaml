@@ -11,7 +11,7 @@ source:
 
 build:
   number: 0
-  skip: True  # [py<37]
+  skip: true  # [py<310]
   script:
     - set GEOS_INCLUDE_PATH=%LIBRARY_INC%  # [win]
     - set GEOS_LIBRARY_PATH=%LIBRARY_LIB%  # [win]
