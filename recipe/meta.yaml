@@ -1,4 +1,4 @@
-{% set name = "Shapely" %}
+{% set name = "shapely" %}
 {% set version = "2.1.2" %}
 
 package:
