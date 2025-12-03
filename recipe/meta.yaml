@@ -36,7 +36,7 @@ requirements:
 
 {% set skip_tests = "" %}
 # Skip broken test on Windows UnicodeDecodeError
-{% set skip_tests = skip_tests + " --ignore=tests/legacy/test_wkb.py::test_dump_binary_load_hex" %}  # [win]
+{% set skip_tests = skip_tests + " --deselect=tests/legacy/test_wkb.py::test_dump_binary_load_hex" %}  # [win]
 
 test:
   requires:
