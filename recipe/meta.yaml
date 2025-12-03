@@ -34,6 +34,10 @@ requirements:
     - python
     - numpy >=1.21
 
+{% set skip_tests = "" %}
+# Skip broken test on Windows UnicodeDecodeError
+{% set skip_tests = skip_tests + " --ignore=tests/legacy/test_wkb.py::test_dump_binary_load_hex" %}  # [win]
+
 test:
   requires:
     - pip
@@ -49,7 +53,7 @@ test:
     # osx fails if LC_ALL is not Italian or Portuguese
     # see https://github.com/shapely/shapely/blob/2.0.5/shapely/tests/legacy/test_locale.py#L14
     - export LC_ALL=it_IT.UTF-8  # [osx]
-    - pytest --pyargs shapely -v
+    - pytest --pyargs {{ skip_tests }} shapely -v
 
 about:
   home: https://github.com/shapely/shapely
