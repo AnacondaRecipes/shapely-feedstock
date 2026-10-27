@@ -1,17 +1,20 @@
 {% set name = "shapely" %}
-{% set version = "2.1.2" %}
+{% set version = "2.2.0" %}
+{% set skip_tests = "" %}
+{% set skip_tests = 'skip_tests + " --deselect=tests/legacy/test_wkb.py::test_dump_binary_load_hex"' %}  # [win]
 
+# Skip broken test on Windows UnicodeDecodeError
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
   url: https://github.com/{{ name }}/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: adbd4060635098d5109e04668edcc015117a133c39da2899cc3ce9b665b76439
+  sha256: 62b78d2ea6103f49beb34672e40c60d93a3dae6c82403322d7feb8083a19ae91
 
 build:
   number: 0
-  skip: true  # [py<310]
+  skip: true  # [py<311]
   script:
     - set GEOS_INCLUDE_PATH=%LIBRARY_INC%  # [win]
     - set GEOS_LIBRARY_PATH=%LIBRARY_LIB%  # [win]
@@ -27,16 +30,12 @@ requirements:
     - numpy {{ numpy }}
     - geos {{ geos }}
     - pip
-    - setuptools >=61.0.0
-    - wheel
     - tomli
+    - meson-python >=0.15.0,!=0.22.0
+    - numpy >=1.26,<3
   run:
     - python
-    - numpy >=1.21
-
-{% set skip_tests = "" %}
-# Skip broken test on Windows UnicodeDecodeError
-{% set skip_tests = skip_tests + " --deselect=tests/legacy/test_wkb.py::test_dump_binary_load_hex" %}  # [win]
+    - numpy >=1.26
 
 test:
   requires:
