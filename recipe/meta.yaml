@@ -1,11 +1,8 @@
 {% set name = "shapely" %}
 {% set version = "2.2.0" %}
-{% set skip_tests = "" %}
-{% set skip_tests = 'skip_tests + " --deselect=tests/legacy/test_wkb.py::test_dump_binary_load_hex"' %}  # [win]
 
-# Skip broken test on Windows UnicodeDecodeError
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
@@ -32,10 +29,14 @@ requirements:
     - pip
     - tomli
     - meson-python >=0.15.0,!=0.22.0
-    - numpy >=1.26,<3
+    - ninja-base
   run:
     - python
     - numpy >=1.26
+
+{% set skip_tests = "" %}
+# Skip broken test on Windows UnicodeDecodeError
+{% set skip_tests = skip_tests + " --deselect=tests/legacy/test_wkb.py::test_dump_binary_load_hex" %}  # [win]
 
 test:
   requires:
