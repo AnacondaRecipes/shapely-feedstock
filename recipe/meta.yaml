@@ -1,17 +1,19 @@
 {% set name = "shapely" %}
-{% set version = "2.1.2" %}
+{% set version = "2.2.0" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://github.com/{{ name }}/{{ name }}/archive/refs/tags/{{ version }}.tar.gz
-  sha256: adbd4060635098d5109e04668edcc015117a133c39da2899cc3ce9b665b76439
+  # PyPI sdist (not GH tag tarball) ships a baked _version.py; GH tarball has
+  # no .git and no _version.py, so versioneer falls back to "0+unknown"
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: e8865e553d874a1ec4a032057ea81fca9def37b188cd8fb550af3b3480b3f88c
 
 build:
   number: 0
-  skip: true  # [py<310]
+  skip: true  # [py<311]
   script:
     - set GEOS_INCLUDE_PATH=%LIBRARY_INC%  # [win]
     - set GEOS_LIBRARY_PATH=%LIBRARY_LIB%  # [win]
@@ -21,18 +23,19 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
+    - pkg-config
   host:
     - python
     - cython
     - numpy {{ numpy }}
     - geos {{ geos }}
     - pip
-    - setuptools >=61.0.0
-    - wheel
     - tomli
+    - meson-python >=0.15.0,!=0.22.0
+    - ninja-base
   run:
     - python
-    - numpy >=1.21
+    - numpy >=1.26
 
 {% set skip_tests = "" %}
 # Skip broken test on Windows UnicodeDecodeError
