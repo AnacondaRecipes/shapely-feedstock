@@ -23,6 +23,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ stdlib('c') }}
+    - pkg-config
   host:
     - python
     - cython
@@ -32,7 +33,6 @@ requirements:
     - tomli
     - meson-python >=0.15.0,!=0.22.0
     - ninja-base
-    - pkg-config
   run:
     - python
     - numpy >=1.26
